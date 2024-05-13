@@ -57,9 +57,10 @@ authorities are secure, seamless, and have legal standing.
   future reference. Additionally, businesses are required to maintain accurate
   records of electronic transactions.
 
-         Requirements for compliance:
-         - Signer Intent
-         - Data Integrity
+Requirements for compliance:
+
+- Signer Intent
+- Data Integrity
 
 #### GDPR
 
@@ -89,8 +90,8 @@ authentication technique which--
 (2) For the purposes of this section any electronic signature or
 electronic authentication technique shall be considered reliable if--
 (a) the signature creation data or the authentication data are, within
-the context in which they are used, linked to the signatory or, as the
-case may be, the authenticator and to no other person;
+the context in which they are used, linked to the signatory or, as the case
+may be, the authenticator and to no other person;
 (b) the signature creation data or the authentication data were, at the
 time of signing, under the control of the signatory or, as the case may
 be, the authenticator and of no other person;
@@ -114,6 +115,43 @@ each House of Parliament.
 
 ## System Design
 
+![Zoho Sign System Design](./SYSTEM_DESIGN.svg)
+
 ### ERD
 
 ![Zoho Sign ERD](./ERD.svg)
+
+### API Design
+
+For backend API design, a simple RESTful Architecture offers a lot of
+flexibility and ease of development allowing to be built and integrated much
+quicker. In RESTful architecture the API is built on top of HTTP by leveraging
+HTTP methods to distinguish between different operations such as creation,
+updating, deletion. The resources can also be nested in case they are
+dependent such as users of an organisation
+
+Example for routes for Organisations :
+
+```
+Create an Org
+POST /orgs
+
+Update an Org
+PUT /orgs/:id
+
+Delete an Org
+DELETE /orgs/:id
+```
+
+Example of nested resources, users within an organisation :
+
+```
+Create a User
+POST /orgs/:org_id/users
+
+Update a User
+PUT /orgs/:org_id/users/:id
+
+Delete a User
+DELETE /orgs/:org_id/users/:id
+```
